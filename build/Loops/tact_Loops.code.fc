@@ -1,0 +1,158 @@
+#pragma version =0.4.3;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+#include "tact_Loops.headers.fc";
+#include "tact_Loops.stdlib.fc";
+#include "tact_Loops.storage.fc";
+
+;;
+;; Contract Loops functions
+;;
+
+tuple $Loops$_contract_init() impure inline_ref {
+    tuple $self = null();
+    return $self;
+}
+
+;;
+;; Receivers of a Contract Loops
+;;
+
+(tuple, ()) $Loops$_internal_text_ea433589033151e46a6e6dc439367c8a88aad77789045319d84ecc10554468a7(tuple $self) impure inline {
+    var $self = $self;
+    int $sum = 0;
+    int $i = 0;
+    repeat (10) {
+        $i = ($i + 1);
+        $sum = ($sum + $i);
+    }
+    __tact_debug_str(__tact_int_to_string($sum));
+    return ($self, ());
+}
+
+(tuple, ()) $Loops$_internal_text_007f5e965b038d2d1c1e1ce2087f0e9cc28884eb5dbd3f025f8ea33ad056b93d(tuple $self) impure inline {
+    var $self = $self;
+    int $sum = 0;
+    int $i = 0;
+    while (($i < 10)) {
+        $i = ($i + 1);
+        $sum = ($sum + $i);
+    }
+    __tact_debug_str(__tact_int_to_string($sum));
+    return ($self, ());
+}
+
+(tuple, ()) $Loops$_internal_text_6c41f904282b5e796592ec6b0b65c59d5bb94002bf100d5e80a4618f42becf67(tuple $self) impure inline {
+    var $self = $self;
+    int $sum = 0;
+    int $i = 0;
+    do {
+        $i = ($i + 1);
+        $sum = ($sum + $i);
+    } until (($i >= 10));
+    __tact_debug_str(__tact_int_to_string($sum));
+    return ($self, ());
+}
+
+((tuple), ()) $Loops$_internal_binary_Deploy(tuple $self, (int) $deploy) impure inline {
+    var $self = $self;
+    var ($deploy'queryId) = $deploy;
+    $self~$Loops$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+    return ($self, ());
+}
+
+;;
+;; Get methods of a Contract Loops
+;;
+
+_ supported_interfaces() method_id {
+    return (
+        "org.ton.introspection.v0"H >> 128,
+        "org.ton.abi.ipfs.v0"H >> 128,
+        "org.ton.deploy.lazy.v0"H >> 128,
+        "org.ton.debug.v0"H >> 128,
+        "org.ton.chain.workchain.v0"H >> 128
+    );
+}
+
+_ get_abi_ipfs() method_id {
+    return "ipfs://QmUGT8bf3nKKZBW5rpU4igfFgp1dAjp5mEeASCk2HyGoLc";
+}
+
+_ lazy_deployment_completed() method_id {
+    return get_data().begin_parse().load_int(1);
+}
+
+;;
+;; Routing of a Contract Loops
+;;
+
+(tuple, int) $Loops$_contract_router_internal(tuple self, int msg_bounced, slice in_msg) impure inline_ref {
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        return (self, true);
+    }
+    
+    ;; Parse incoming message
+    int op = 0;
+    if (slice_bits(in_msg) >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var msg = in_msg~$Deploy$_load();
+        self~$Loops$_internal_binary_Deploy(msg);
+        return (self, true);
+    }
+    
+    ;; Text Receivers
+    if (op == 0) {
+        var text_op = slice_hash(in_msg);
+        
+        ;; Receive "loop1" message
+        if (text_op == 0xea433589033151e46a6e6dc439367c8a88aad77789045319d84ecc10554468a7) {
+            self~$Loops$_internal_text_ea433589033151e46a6e6dc439367c8a88aad77789045319d84ecc10554468a7();
+            return (self, true);
+        }
+        
+        ;; Receive "loop2" message
+        if (text_op == 0x007f5e965b038d2d1c1e1ce2087f0e9cc28884eb5dbd3f025f8ea33ad056b93d) {
+            self~$Loops$_internal_text_007f5e965b038d2d1c1e1ce2087f0e9cc28884eb5dbd3f025f8ea33ad056b93d();
+            return (self, true);
+        }
+        
+        ;; Receive "loop3" message
+        if (text_op == 0x6c41f904282b5e796592ec6b0b65c59d5bb94002bf100d5e80a4618f42becf67) {
+            self~$Loops$_internal_text_6c41f904282b5e796592ec6b0b65c59d5bb94002bf100d5e80a4618f42becf67();
+            return (self, true);
+        }
+    }
+    
+    return (self, false);
+}
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    var msg_flags = cs~load_uint(4);
+    var msg_bounced = -(msg_flags & 1);
+    slice msg_sender_addr = __tact_verify_address(cs~load_msg_addr());
+    __tact_context = (msg_bounced, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var self = $Loops$_contract_load();
+    
+    ;; Handle operation
+    int handled = self~$Loops$_contract_router_internal(msg_bounced, in_msg);
+    
+    ;; Throw if not handled
+    throw_unless(130, handled);
+    
+    ;; Persist state
+    $Loops$_contract_store(self);
+}

@@ -1,0 +1,164 @@
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ bounce:bool to:address value:int257 mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell = SendParameters
+;;
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int bounce, slice to, int value, int mode, cell body, cell code, cell data) inline {
+    return (bounce, to, value, mode, body, code, data);
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode(slice to, int value, int mode) inline {
+    return (true, to, value, mode, null(), null(), null());
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 2490013878);
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int queryId) inline {
+    return (queryId);
+}
+
+;;
+;; Type: TokenInfo
+;; TLB: _ ticker:^string decimals:int257 = TokenInfo
+;;
+
+builder $TokenInfo$_store(builder build_0, (slice, int) v) inline {
+    var (v'ticker, v'decimals) = v;
+    build_0 = build_0.store_ref(begin_cell().store_slice(v'ticker).end_cell());
+    build_0 = build_0.store_int(v'decimals, 257);
+    return build_0;
+}
+
+cell $TokenInfo$_store_cell((slice, int) v) inline {
+    return $TokenInfo$_store(begin_cell(), v).end_cell();
+}
+
+((slice, int)) $TokenInfo$_constructor_ticker_decimals(slice ticker, int decimals) inline {
+    return (ticker, decimals);
+}
+
+;;
+;; Type: Replace
+;; Header: 0x5285f402
+;; TLB: replace#5285f402 items:dict<int, address> = Replace
+;;
+
+(slice, ((cell))) $Replace$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 1384510466);
+    var v'items = sc_0~load_dict();
+    return (sc_0, (v'items));
+}
+
+;;
+;; Type: Add
+;; Header: 0x63703632
+;; TLB: add#63703632 key:int257 value:int257 = Add
+;;
+
+(slice, ((int, int))) $Add$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 1668298290);
+    var v'key = sc_0~load_int(257);
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'key, v'value));
+}
+
+;;
+;; Type: Map
+;;
+
+builder $Map$_store(builder build_0, (cell, cell, cell, cell, cell, cell, cell, cell) v) inline {
+    var (v'map1, v'map2, v'map3, v'map4, v'map_addr1, v'map_addr2, v'map_addr3, v'map_addr4) = v;
+    build_0 = build_0.store_dict(v'map1);
+    build_0 = build_0.store_dict(v'map2);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_dict(v'map3);
+    build_1 = build_1.store_dict(v'map4);
+    build_1 = build_1.store_dict(v'map_addr1);
+    var build_2 = begin_cell();
+    build_2 = build_2.store_dict(v'map_addr2);
+    build_2 = build_2.store_dict(v'map_addr3);
+    build_2 = build_2.store_dict(v'map_addr4);
+    build_1 = store_ref(build_1, build_2.end_cell());
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((cell, cell, cell, cell, cell, cell, cell, cell))) $Map$_load(slice sc_0) inline {
+    var v'map1 = sc_0~load_dict();
+    var v'map2 = sc_0~load_dict();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'map3 = sc_1~load_dict();
+    var v'map4 = sc_1~load_dict();
+    var v'map_addr1 = sc_1~load_dict();
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'map_addr2 = sc_2~load_dict();
+    var v'map_addr3 = sc_2~load_dict();
+    var v'map_addr4 = sc_2~load_dict();
+    return (sc_0, (v'map1, v'map2, v'map3, v'map4, v'map_addr1, v'map_addr2, v'map_addr3, v'map_addr4));
+}
+
+(slice, ((cell))) $Map$init$_load(slice sc_0) inline {
+    var v'arg = sc_0~load_dict();
+    return (sc_0, (v'arg));
+}
+
+(cell, cell, cell, cell, cell, cell, cell, cell) $Map$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    __tact_context_sys = $sc~load_ref();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Map$_load();
+    } else {
+        ;; Allow only workchain deployments
+        throw_unless(137, my_address().preload_uint(11) == 1024);
+        (cell arg) = $sc~$Map$init$_load();
+        $sc.end_parse();
+        return $Map$_contract_init(arg);
+    }
+}
+
+() $Map$_contract_store((cell, cell, cell, cell, cell, cell, cell, cell) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_ref(__tact_context_sys);
+    b = b.store_int(true, 1);
+    b = $Map$_store(b, v);
+    set_data(b.end_cell());
+}

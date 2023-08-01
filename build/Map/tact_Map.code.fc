@@ -1,0 +1,208 @@
+#pragma version =0.4.3;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+#include "tact_Map.headers.fc";
+#include "tact_Map.stdlib.fc";
+#include "tact_Map.constants.fc";
+#include "tact_Map.storage.fc";
+
+;;
+;; Contract Map functions
+;;
+
+(cell, cell, cell, cell, cell, cell, cell, cell) $Map$_contract_init(cell $arg) impure inline_ref {
+    var (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4)) = (null(), null(), null(), null(), null(), null(), null(), null());
+    $self'map1 = $arg;
+    return ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4);
+}
+
+((cell, cell, cell, cell, cell, cell, cell, cell), slice) $Map$_fun_oneItem((cell, cell, cell, cell, cell, cell, cell, cell) $self, int $key) impure inline_ref {
+    var (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4)) = $self;
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), __tact_dict_get_int_slice($self'map2, 257, $key));
+}
+
+((cell, cell, cell, cell, cell, cell, cell, cell), cell) $Map$_fun_allItem((cell, cell, cell, cell, cell, cell, cell, cell) $self) impure inline_ref {
+    var (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4)) = $self;
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), $self'map3);
+}
+
+;;
+;; Receivers of a Contract Map
+;;
+
+((cell, cell, cell, cell, cell, cell, cell, cell), ()) $Map$_internal_text_2db851a56a7d13c238a59783d8ff80cf1858df1504309cbd940f1daa4f32dec5((cell, cell, cell, cell, cell, cell, cell, cell) $self) impure inline {
+    var ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4) = $self;
+    $self'map1~__tact_dict_set_int_int(257, 2359, true, 1);
+    $self'map2~__tact_dict_set_int_slice(257, 123, __tact_create_address(0, 0));
+    $self'map4~__tact_dict_set_int_cell(257, (- 900), $TokenInfo$_store_cell($TokenInfo$_constructor_ticker_decimals(__gen_slice_string_7f23a419b837f87cb02beed6e36d91ee847b2ebce01b9ef5a02df2baf4c081a1(), 9)));
+    $self'map_addr1~__tact_dict_set_slice_int(267, __tact_create_address(0, 0), true, 1);
+    $self'map_addr2~__tact_dict_set_slice_slice(267, __tact_context_get_sender(), __tact_create_address(0, 1));
+    $self'map_addr4~__tact_dict_set_slice_cell(267, __tact_create_address(0, 3), $TokenInfo$_store_cell($TokenInfo$_constructor_ticker_decimals(__gen_slice_string_7f23a419b837f87cb02beed6e36d91ee847b2ebce01b9ef5a02df2baf4c081a1(), 9)));
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), ());
+}
+
+((cell, cell, cell, cell, cell, cell, cell, cell), ()) $Map$_internal_text_cb12f2784b4b1117ff896a549c344705dda2007d8c283d970bc6ecf3a62f4651((cell, cell, cell, cell, cell, cell, cell, cell) $self) impure inline {
+    var ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4) = $self;
+    $self'map1~__tact_dict_set_int_int(257, 2359, null(), 1);
+    $self'map2~__tact_dict_set_int_slice(257, 123, null());
+    $self'map3~__tact_dict_set_int_int(257, (- 900), null(), 257);
+    $self'map_addr1~__tact_dict_set_slice_int(267, __tact_create_address(0, 0), null(), 1);
+    $self'map_addr2~__tact_dict_set_slice_slice(267, __tact_context_get_sender(), null());
+    $self'map_addr3~__tact_dict_set_slice_int(267, __tact_create_address(0, 3), null(), 257);
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), ());
+}
+
+(((cell, cell, cell, cell, cell, cell, cell, cell)), ()) $Map$_internal_binary_Replace((cell, cell, cell, cell, cell, cell, cell, cell) $self, (cell) $msg) impure inline {
+    var ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4) = $self;
+    var ($msg'items) = $msg;
+    $self'map2 = $msg'items;
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), ());
+}
+
+((cell, cell, cell, cell, cell, cell, cell, cell), ()) $Map$_internal_text_0c1cd7659460b0f81b94237cd5ffc13a4fb58ea689b2815de74dd3770646a4ea((cell, cell, cell, cell, cell, cell, cell, cell) $self) impure inline {
+    var ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4) = $self;
+    $self'map1 = null();
+    $self'map2 = null();
+    $self'map3 = null();
+    $self'map_addr1 = null();
+    $self'map_addr2 = null();
+    $self'map_addr3 = null();
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), ());
+}
+
+(((cell, cell, cell, cell, cell, cell, cell, cell)), ()) $Map$_internal_binary_Add((cell, cell, cell, cell, cell, cell, cell, cell) $self, (int, int) $msg) impure inline {
+    var ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4) = $self;
+    var ($msg'key, $msg'value) = $msg;
+    $self'map3~__tact_dict_set_int_int(257, $msg'key, $msg'value, 257);
+    $global_send($SendParameters$_constructor_to_value_mode(__tact_context_get_sender(), 0, (64 + 2)));
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), ());
+}
+
+(((cell, cell, cell, cell, cell, cell, cell, cell)), ()) $Map$_internal_binary_Deploy((cell, cell, cell, cell, cell, cell, cell, cell) $self, (int) $deploy) impure inline {
+    var ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4) = $self;
+    var ($deploy'queryId) = $deploy;
+    ($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4)~$Map$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+    return (($self'map1, $self'map2, $self'map3, $self'map4, $self'map_addr1, $self'map_addr2, $self'map_addr3, $self'map_addr4), ());
+}
+
+;;
+;; Get methods of a Contract Map
+;;
+
+_ %oneItem(int $$key) method_id(68660) {
+    int $key = $$key;
+    var self = $Map$_contract_load();
+    var res = self~$Map$_fun_oneItem($key);
+    return res;
+}
+
+_ %allItem() method_id(73088) {
+    var self = $Map$_contract_load();
+    var res = self~$Map$_fun_allItem();
+    return res;
+}
+
+_ supported_interfaces() method_id {
+    return (
+        "org.ton.introspection.v0"H >> 128,
+        "org.ton.abi.ipfs.v0"H >> 128,
+        "org.ton.deploy.lazy.v0"H >> 128,
+        "org.ton.chain.workchain.v0"H >> 128
+    );
+}
+
+_ get_abi_ipfs() method_id {
+    return "ipfs://QmYnB4gomsHQUd2d5eAzD1YumQwfhCEsYTVfn1ofMK6A1e";
+}
+
+_ lazy_deployment_completed() method_id {
+    return get_data().begin_parse().load_int(1);
+}
+
+;;
+;; Routing of a Contract Map
+;;
+
+((cell, cell, cell, cell, cell, cell, cell, cell), int) $Map$_contract_router_internal((cell, cell, cell, cell, cell, cell, cell, cell) self, int msg_bounced, slice in_msg) impure inline_ref {
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        return (self, true);
+    }
+    
+    ;; Parse incoming message
+    int op = 0;
+    if (slice_bits(in_msg) >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    
+    
+    ;; Receive Replace message
+    if (op == 1384510466) {
+        var msg = in_msg~$Replace$_load();
+        self~$Map$_internal_binary_Replace(msg);
+        return (self, true);
+    }
+    
+    ;; Receive Add message
+    if (op == 1668298290) {
+        var msg = in_msg~$Add$_load();
+        self~$Map$_internal_binary_Add(msg);
+        return (self, true);
+    }
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var msg = in_msg~$Deploy$_load();
+        self~$Map$_internal_binary_Deploy(msg);
+        return (self, true);
+    }
+    
+    ;; Text Receivers
+    if (op == 0) {
+        var text_op = slice_hash(in_msg);
+        
+        ;; Receive "set keys" message
+        if (text_op == 0x2db851a56a7d13c238a59783d8ff80cf1858df1504309cbd940f1daa4f32dec5) {
+            self~$Map$_internal_text_2db851a56a7d13c238a59783d8ff80cf1858df1504309cbd940f1daa4f32dec5();
+            return (self, true);
+        }
+        
+        ;; Receive "delete keys" message
+        if (text_op == 0xcb12f2784b4b1117ff896a549c344705dda2007d8c283d970bc6ecf3a62f4651) {
+            self~$Map$_internal_text_cb12f2784b4b1117ff896a549c344705dda2007d8c283d970bc6ecf3a62f4651();
+            return (self, true);
+        }
+        
+        ;; Receive "clear" message
+        if (text_op == 0x0c1cd7659460b0f81b94237cd5ffc13a4fb58ea689b2815de74dd3770646a4ea) {
+            self~$Map$_internal_text_0c1cd7659460b0f81b94237cd5ffc13a4fb58ea689b2815de74dd3770646a4ea();
+            return (self, true);
+        }
+    }
+    
+    return (self, false);
+}
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    var msg_flags = cs~load_uint(4);
+    var msg_bounced = -(msg_flags & 1);
+    slice msg_sender_addr = __tact_verify_address(cs~load_msg_addr());
+    __tact_context = (msg_bounced, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var self = $Map$_contract_load();
+    
+    ;; Handle operation
+    int handled = self~$Map$_contract_router_internal(msg_bounced, in_msg);
+    
+    ;; Throw if not handled
+    throw_unless(130, handled);
+    
+    ;; Persist state
+    $Map$_contract_store(self);
+}
